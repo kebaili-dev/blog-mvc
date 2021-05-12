@@ -1,0 +1,41 @@
+<?php 
+if (session_status() === PHP_SESSION_NONE): ?>
+    <?php session_start() ?>
+<?php endif ?>
+
+<?php require_once 'models/user.php' ?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <header class="navbar navbar-primary">
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <?php if (isAuth()): ?>
+                    <li><a href="admin.php">Administration</a></li>
+                    <li><a href="logout.php">Déconnexion</a></li>
+                <?php else: ?>
+                    <li><a href="login.php">Connexion</a></li>
+                    <li><a href="register.php">Inscription</a></li>
+                <?php endif ?>
+            </ul>
+        </nav>
+        <?php if (isAuth()): ?>
+            <p>Bonjour <?= $_SESSION['auth']['firstname'] ?> <?= $_SESSION['auth']['lastname'] ?></p>
+        <?php endif ?>
+    </header>
+    
+    <main class="container">
+        <!-- Chargement du template (le fichier .phtml spécifique à la page) -->
+        <?php require $template . '.phtml' ?>
+    </main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<h1 class="text-center">Accueil du blog</h1>
+
+<ul class="post-list">
+    <?php foreach ($posts as $post): ?>
+        <li>
+            <article class="post">
+                <header>
+                    <h2><a href="show_post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a></h2>
+                    <small>Rédigé le <?= $post['creation_date'] ?> par <?= $post['firstname'] ?> <?= $post['lastname'] ?></small>
+                </header>
+                <hr>
+                <?= substr(htmlspecialchars($post['content']), 0, 300) ?>[...] <a href="show_post.php?id=<?= $post['id'] ?>">(voir la suite)</a>
+            </article>
+        </li>
+    <?php endforeach ?>
+</ul>

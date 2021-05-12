@@ -1,0 +1,31 @@
+<h1 class="text-center">Administration</h1>
+
+<nav>
+    <a class="button button-primary" href="add_post.php">Créer un nouvel article</a>
+    <a class="button button-primary" href="add_category.php">Créer une nouvelle catégorie</a>
+</nav>
+
+<table class="table post-table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Article</th>
+            <th>Auteur</th>
+            <th>Catégorie</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($posts as $post): ?>
+            <tr>
+                <td><a href="show_post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a></td>
+                <td><?= substr(htmlspecialchars($post['content']), 0, 100) ?>[...]</td>
+                <td><?= $post['firstname'] ?> <?= $post['lastname'] ?></td>
+                <td><?= $post['name'] ?></td>
+                <td>
+                    <a href="edit_post.php?id=<?= $post['id'] ?>" title="Editer l'article"><i class="fa fa-edit"></i></a> | 
+                    <a class="delete-post" href="delete_post.php?id=<?= $post['id'] ?>" title="Supprimer l'article"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
